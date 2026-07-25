@@ -24,14 +24,22 @@
       <input type="search" id="search-input" placeholder="Search dec, hex, oct, bin, char, description..." aria-label="Search ASCII table">
       <div class="table-scroll">
         <table id="ascii-table">
+          <colgroup>
+            <col class="col-dec">
+            <col class="col-hex">
+            <col class="col-char">
+            <col class="col-oct">
+            <col class="col-bin">
+            <col class="col-description">
+          </colgroup>
           <thead>
             <tr>
-              <th class="sortable" data-sort-key="dec" data-sort-base="10">Dec<span class="sort-indicator"></span></th>
-              <th class="sortable" data-sort-key="hex" data-sort-base="16">Hex<span class="sort-indicator"></span></th>
-              <th>Char</th>
-              <th>Oct</th>
-              <th>Bin</th>
-              <th>Description</th>
+              <th class="sortable" data-sort-key="dec" data-sort-type="number" data-sort-base="10">Dec<span class="sort-indicator"></span></th>
+              <th class="sortable" data-sort-key="hex" data-sort-type="number" data-sort-base="16">Hex<span class="sort-indicator"></span></th>
+              <th class="sortable" data-sort-key="char" data-sort-type="string">Char<span class="sort-indicator"></span></th>
+              <th class="sortable" data-sort-key="oct" data-sort-type="number" data-sort-base="8">Oct<span class="sort-indicator"></span></th>
+              <th class="sortable" data-sort-key="bin" data-sort-type="number" data-sort-base="2">Bin<span class="sort-indicator"></span></th>
+              <th class="sortable" data-sort-key="description" data-sort-type="string">Description<span class="sort-indicator"></span></th>
             </tr>
           </thead>
           <tbody>

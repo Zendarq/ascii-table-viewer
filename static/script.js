@@ -61,22 +61,30 @@
   /* ---------- Reference table sorting ---------- */
   const asciiTableBody = document.querySelector("#ascii-table tbody");
   const sortableHeaders = document.querySelectorAll("#ascii-table th.sortable");
+  const SORT_LABELS = { dec: "Dec", hex: "Hex", char: "Char", oct: "Oct", bin: "Bin", description: "Description" };
   let currentSort = { key: null, direction: 1 };
 
-  function cellValue(row, key, base) {
-    const cell = row.querySelector(`td[data-label="${key === "dec" ? "Dec" : "Hex"}"]`);
-    return parseInt(cell.textContent, base);
+  function cellValue(row, key, type, base) {
+    const cell = row.querySelector(`td[data-label="${SORT_LABELS[key]}"]`);
+    const text = cell.textContent.trim();
+    return type === "number" ? parseInt(text, base) : text.toLowerCase();
   }
 
   sortableHeaders.forEach((th) => {
     th.addEventListener("click", () => {
       const key = th.dataset.sortKey;
+      const type = th.dataset.sortType;
       const base = Number(th.dataset.sortBase);
       const direction = currentSort.key === key ? -currentSort.direction : 1;
       currentSort = { key, direction };
 
       const rows = Array.from(asciiTableBody.querySelectorAll("tr"));
-      rows.sort((a, b) => direction * (cellValue(a, key, base) - cellValue(b, key, base)));
+      rows.sort((a, b) => {
+        const valueA = cellValue(a, key, type, base);
+        const valueB = cellValue(b, key, type, base);
+        if (type === "number") return direction * (valueA - valueB);
+        return direction * valueA.localeCompare(valueB);
+      });
       rows.forEach((row) => asciiTableBody.appendChild(row));
 
       sortableHeaders.forEach((header) => {

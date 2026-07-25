@@ -144,9 +144,44 @@ textarea {
 
 table {
   width: 100%;
+  table-layout: fixed;
   border-collapse: collapse;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 0.9rem;
+}
+
+.col-dec,
+.col-hex,
+.col-char {
+  width: 2.75rem;
+}
+
+.col-oct {
+  width: 3.5rem;
+}
+
+.col-bin {
+  width: 7.5rem;
+}
+
+.col-description {
+  width: auto;
+}
+
+thead th,
+tbody td {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+tbody td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+td[data-label="Description"] {
+  white-space: normal;
 }
 
 thead th {
@@ -286,6 +321,19 @@ tbody tr:nth-child(even) {
 
   td[data-label="Description"] {
     white-space: normal;
-    min-width: 6.5rem;
+  }
+
+  .col-dec,
+  .col-hex,
+  .col-char {
+    width: 2.2rem;
+  }
+
+  .col-oct {
+    width: 2.6rem;
+  }
+
+  .col-bin {
+    width: 5rem;
   }
 }
