@@ -28,9 +28,9 @@
             <tr>
               <th class="sortable" data-sort-key="dec" data-sort-base="10">Dec<span class="sort-indicator"></span></th>
               <th class="sortable" data-sort-key="hex" data-sort-base="16">Hex<span class="sort-indicator"></span></th>
+              <th>Char</th>
               <th>Oct</th>
               <th>Bin</th>
-              <th>Char</th>
               <th>Description</th>
             </tr>
           </thead>
@@ -39,9 +39,9 @@
             <tr>
               <td data-label="Dec">{{ row.dec }}</td>
               <td data-label="Hex">{{ row.hex }}</td>
+              <td data-label="Char" class="char-cell">{{ row.char }}</td>
               <td data-label="Oct">{{ row.oct }}</td>
               <td data-label="Bin">{{ row.bin }}</td>
-              <td data-label="Char" class="char-cell">{{ row.char }}</td>
               <td data-label="Description">{{ row.description }}</td>
             </tr>
             {% endfor %}
