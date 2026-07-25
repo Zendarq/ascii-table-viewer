@@ -152,7 +152,7 @@ table {
 
 .col-dec,
 .col-hex {
-  width: 2.75rem;
+  width: 3.25rem;
 }
 
 .col-char {
@@ -160,7 +160,7 @@ table {
 }
 
 .col-oct {
-  width: 3.5rem;
+  width: 3.75rem;
 }
 
 .col-bin {
@@ -178,8 +178,6 @@ tbody td {
 }
 
 tbody td {
-  overflow: hidden;
-  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
@@ -337,7 +335,7 @@ tbody tr:nth-child(even) {
 
   .col-dec,
   .col-hex {
-    width: 2.2rem;
+    width: 2.75rem;
   }
 
   .col-char {
@@ -345,7 +343,7 @@ tbody tr:nth-child(even) {
   }
 
   .col-oct {
-    width: 2.6rem;
+    width: 3rem;
   }
 
   .col-bin {
