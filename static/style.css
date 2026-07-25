@@ -196,6 +196,7 @@ thead th {
   border-bottom: 2px solid var(--border);
   font-family: system-ui, sans-serif;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 thead th.sortable {
