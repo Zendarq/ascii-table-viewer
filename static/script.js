@@ -129,6 +129,43 @@
     }
   });
 
+  /* ---------- Hex -> Text converter ---------- */
+  const hexInput = document.getElementById("hex-input");
+  const textOutput = document.getElementById("text-output");
+  const hex2textError = document.getElementById("hex2text-error");
+  const copyTextButton = document.getElementById("copy-text");
+
+  function hexToText(input) {
+    const cleaned = input.replace(/0x/gi, "").replace(/[^0-9a-fA-F]/g, "");
+    if (!cleaned) return { text: "", error: "" };
+    if (cleaned.length % 2 !== 0) {
+      return { text: "", error: "Odd number of hex digits" };
+    }
+    const bytes = cleaned.match(/.{2}/g).map((pair) => parseInt(pair, 16));
+    return { text: bytes.map((code) => String.fromCharCode(code)).join(""), error: "" };
+  }
+
+  hexInput.addEventListener("input", () => {
+    const { text, error } = hexToText(hexInput.value);
+    textOutput.value = text;
+    hex2textError.textContent = error;
+  });
+
+  copyTextButton.addEventListener("click", async () => {
+    if (!textOutput.value) return;
+    try {
+      await navigator.clipboard.writeText(textOutput.value);
+      const original = copyTextButton.textContent;
+      copyTextButton.textContent = "Copied!";
+      setTimeout(() => {
+        copyTextButton.textContent = original;
+      }, 1200);
+    } catch (err) {
+      textOutput.select();
+      document.execCommand("copy");
+    }
+  });
+
   /* ---------- Hex Dump Viewer ---------- */
   const hexdumpInput = document.getElementById("hexdump-input");
   const hexdumpHexEl = document.getElementById("hexdump-hex");

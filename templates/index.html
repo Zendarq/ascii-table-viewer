@@ -15,6 +15,7 @@
   <nav class="tab-bar" role="tablist">
     <button class="tab-button" data-tab="table" role="tab" aria-selected="true">Reference Table</button>
     <button class="tab-button" data-tab="convert" role="tab" aria-selected="false">Text → Hex</button>
+    <button class="tab-button" data-tab="hex2text" role="tab" aria-selected="false">Hex → Text</button>
     <button class="tab-button" data-tab="hexdump" role="tab" aria-selected="false">Hex Dump Viewer</button>
   </nav>
 
@@ -72,7 +73,20 @@
       <textarea id="hex-output" rows="6" readonly placeholder="Hex output appears here..."></textarea>
     </section>
 
-    <!-- Tab 3: Hex Dump Viewer -->
+    <!-- Tab 3: Hex -> Text -->
+    <section id="tab-hex2text" class="tab-panel" data-tab-panel="hex2text" hidden>
+      <label for="hex-input">Hex</label>
+      <textarea id="hex-input" rows="6" placeholder="Paste hex bytes here, e.g. 48 65 6c 6c 6f"></textarea>
+
+      <div class="convert-output-header">
+        <label for="text-output">Text</label>
+        <span id="hex2text-error" class="byte-count"></span>
+        <button id="copy-text" class="small-button" type="button">Copy</button>
+      </div>
+      <textarea id="text-output" rows="6" readonly placeholder="Decoded text appears here..."></textarea>
+    </section>
+
+    <!-- Tab 4: Hex Dump Viewer -->
     <section id="tab-hexdump" class="tab-panel" data-tab-panel="hexdump" hidden>
       <label for="hexdump-input">Paste a hex dump (xxd / hexdump -C style)</label>
       <textarea id="hexdump-input" rows="8" placeholder="00000000  48 65 6c 6c 6f 20 57 6f  72 6c 64 21 0a           |Hello World!.|"></textarea>

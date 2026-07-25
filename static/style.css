@@ -254,6 +254,10 @@ tbody tr:nth-child(even) {
   margin-left: auto;
 }
 
+#hex2text-error:not(:empty) {
+  color: #dc2626;
+}
+
 .small-button {
   min-height: 36px;
   padding: 0.35rem 0.85rem;
