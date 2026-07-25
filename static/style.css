@@ -151,9 +151,12 @@ table {
 }
 
 .col-dec,
-.col-hex,
-.col-char {
+.col-hex {
   width: 2.75rem;
+}
+
+.col-char {
+  width: 4rem;
 }
 
 .col-oct {
@@ -324,9 +327,12 @@ tbody tr:nth-child(even) {
   }
 
   .col-dec,
-  .col-hex,
-  .col-char {
+  .col-hex {
     width: 2.2rem;
+  }
+
+  .col-char {
+    width: 3rem;
   }
 
   .col-oct {
