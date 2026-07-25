@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ASCII Table Viewer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="app-header">
+    <h1>ASCII Table Viewer</h1>
+    <button id="theme-toggle" class="icon-button" type="button" aria-label="Toggle dark mode">🌙</button>
+  </header>
+
+  <nav class="tab-bar" role="tablist">
+    <button class="tab-button" data-tab="table" role="tab" aria-selected="true">Reference Table</button>
+    <button class="tab-button" data-tab="convert" role="tab" aria-selected="false">Text → Hex</button>
+    <button class="tab-button" data-tab="hexdump" role="tab" aria-selected="false">Hex Dump Viewer</button>
+  </nav>
+
+  <main>
+    <!-- Tab 1: Reference Table -->
+    <section id="tab-table" class="tab-panel" data-tab-panel="table">
+      <input type="search" id="search-input" placeholder="Search dec, hex, oct, bin, char, description..." aria-label="Search ASCII table">
+      <div class="table-scroll">
+        <table id="ascii-table">
+          <thead>
+            <tr>
+              <th class="sortable" data-sort-key="dec" data-sort-base="10">Dec<span class="sort-indicator"></span></th>
+              <th class="sortable" data-sort-key="hex" data-sort-base="16">Hex<span class="sort-indicator"></span></th>
+              <th>Oct</th>
+              <th>Bin</th>
+              <th>Char</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in ascii_data %}
+            <tr>
+              <td data-label="Dec">{{ row.dec }}</td>
+              <td data-label="Hex">{{ row.hex }}</td>
+              <td data-label="Oct">{{ row.oct }}</td>
+              <td data-label="Bin">{{ row.bin }}</td>
+              <td data-label="Char" class="char-cell">{{ row.char }}</td>
+              <td data-label="Description">{{ row.description }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <p id="no-results" class="no-results" hidden>No matching characters.</p>
+    </section>
+
+    <!-- Tab 2: Text -> Hex -->
+    <section id="tab-convert" class="tab-panel" data-tab-panel="convert" hidden>
+      <label for="text-input">Text</label>
+      <textarea id="text-input" rows="6" placeholder="Type or paste ASCII text here..."></textarea>
+
+      <div class="convert-output-header">
+        <label for="hex-output">Hex</label>
+        <span id="byte-count" class="byte-count">0 bytes</span>
+        <button id="copy-hex" class="small-button" type="button">Copy</button>
+      </div>
+      <textarea id="hex-output" rows="6" readonly placeholder="Hex output appears here..."></textarea>
+    </section>
+
+    <!-- Tab 3: Hex Dump Viewer -->
+    <section id="tab-hexdump" class="tab-panel" data-tab-panel="hexdump" hidden>
+      <label for="hexdump-input">Paste a hex dump (xxd / hexdump -C style)</label>
+      <textarea id="hexdump-input" rows="8" placeholder="00000000  48 65 6c 6c 6f 20 57 6f  72 6c 64 21 0a           |Hello World!.|"></textarea>
+
+      <div class="hexdump-panes">
+        <div class="hexdump-pane">
+          <h2>Hex</h2>
+          <div id="hexdump-hex" class="byte-grid"></div>
+        </div>
+        <div class="hexdump-pane">
+          <h2>ASCII</h2>
+          <div id="hexdump-ascii" class="byte-grid"></div>
+        </div>
+      </div>
+      <p id="hexdump-empty" class="no-results">Paste a hex dump above to see it split into hex and ASCII, with linked highlighting.</p>
+    </section>
+  </main>
+
+  <script>
+    window.ASCII_DATA = {{ ascii_data | tojson }};
+  </script>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
