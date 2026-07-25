@@ -203,6 +203,10 @@ thead th.sortable {
   user-select: none;
 }
 
+thead th.char-header {
+  text-align: center;
+}
+
 thead th.sortable:hover {
   color: var(--accent);
 }
